@@ -39,10 +39,19 @@ namespace Roulette
             Thread roulette = new(spinRoulette);
             roulette.Start();
             roulette.Join();
-            Console.WriteLine($"Game over...game log saved in {logPath} ");
-            using StreamWriter sw = new(logPath); 
-            foreach (var player in players)
-                sw.WriteLine(player.ToString());
+            Console.WriteLine($"\nGame over...");
+            try
+            {
+                using StreamWriter sw = new(logPath);
+                foreach (var player in players)
+                    sw.WriteLine(player.ToString());
+                Console.WriteLine($"Game log saved in {logPath} ");
+            }
+            catch
+            {
+                Console.WriteLine($"Error save game log in {logPath} ");
+            }
+            
         }
 
         private void spinRoulette() 

@@ -9,7 +9,6 @@
             ThreadPool.QueueUserWorkItem(GenerateNumbers, resetEvent);
             ThreadPool.QueueUserWorkItem(NumbersSum, resetEvent);
             ThreadPool.QueueUserWorkItem(NumbersMul, resetEvent);
-
             Console.ReadKey();
         }
 

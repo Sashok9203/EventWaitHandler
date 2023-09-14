@@ -15,6 +15,7 @@
             int playersCount = new Random().Next(MinPlayes, MaxPlayers + 1);
             RouletteGame game = new(MinPlayerBalance, MaxPlayerBalance, MinRouletteNumber, MaxRouletteNumber, playersCount, PlayersAtTable);
             game.Start();
+            Console.ReadKey();
         }
     }
 }
