@@ -2,7 +2,9 @@
 {
     internal class Program
     {
-
+        private static readonly string numbersPath = @"D:\Numbers.txt";
+        private static readonly string sumNumbersPath = @"D:\SumNumbers.txt";
+        private static readonly string mulNumbersPath = @"D:\MulNumbers.txt";
         static void Main(string[] args)
         {
             ManualResetEvent resetEvent = new(false);
@@ -19,7 +21,7 @@
             try
             {
                 Random rnd = new();
-                using StreamWriter sw = new(@"D:\Numbers.txt");
+                using StreamWriter sw = new(numbersPath);
                 for (int i = 0; i < 10; i++)
                     sw.WriteLine(rnd.Next(1, 101));
 
@@ -31,7 +33,7 @@
             }
             finally
             {
-                if (!error) Console.WriteLine("Number generated");
+                if (!error) Console.WriteLine("Numbers generated");
                 ((ManualResetEvent)o).Set();
             }
         }
@@ -43,11 +45,11 @@
             try
             {
                 List<int> numbers = new();
-                using StreamReader sr = new(@"D:\Numbers.txt");
+                using StreamReader sr = new(numbersPath);
                 while (!sr.EndOfStream)
                     numbers.Add(int.Parse(sr.ReadLine()));
 
-                using StreamWriter sw = new(@"D:\SumNumbers.txt");
+                using StreamWriter sw = new(sumNumbersPath);
                 for (int i = 0; i < numbers.Count - 1; i += 2)
                     sw.WriteLine(numbers[i] + numbers[i + 1]);
 
@@ -59,7 +61,7 @@
             }
             finally
             {
-                if (!error) Console.WriteLine("Number added");
+                if (!error) Console.WriteLine("Numberss added");
             }
         }
         static void NumbersMul(object o)
@@ -69,10 +71,10 @@
             try
             {
                 List<int> numbers = new();
-                using StreamReader sr = new(@"D:\Numbers.txt");
+                using StreamReader sr = new(numbersPath);
                 while (!sr.EndOfStream)
                     numbers.Add(int.Parse(sr.ReadLine()));
-                using StreamWriter sw = new(@"D:\MulNumbers.txt");
+                using StreamWriter sw = new(mulNumbersPath);
                 for (int i = 0; i < numbers.Count - 1; i += 2)
                     sw.WriteLine(numbers[i] * numbers[i + 1]);
             }
@@ -83,7 +85,7 @@
             }
             finally
             {
-                if (!error) Console.WriteLine("Number multiplied");
+                if (!error) Console.WriteLine("Numbers multiplied");
             }
         }
     }
